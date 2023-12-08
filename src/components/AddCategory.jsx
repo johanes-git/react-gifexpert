@@ -1,0 +1,32 @@
+import { useState } from "react";
+
+export const AddCategory = ( { onNewCategory }) => {
+  const [inputValue, setInputValue] = useState();
+
+  const onInputChanged = ({ target }) => {
+    setInputValue(target.value);
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if ( inputValue.trim().length <= 1 ) return;
+    // setCategories( categories => [ inputValue, ...categories ]);
+    onNewCategory( inputValue.trim());
+    setInputValue('');
+    
+  };
+
+  return (
+    // <form onSubmit={ (event ) => onSubmit( event ) }>
+    <form onSubmit={onSubmit}>
+      <input
+        id="buscar"
+        type="text"
+        placeholder="Buscar gift"
+        value={inputValue || ''}
+        onChange={onInputChanged}
+      />
+    </form>
+  );
+};
